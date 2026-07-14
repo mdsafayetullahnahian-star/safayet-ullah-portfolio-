@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Safayet Ullah | Stories in Light & Silence</title>
+  
+  <!-- Typography & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@300;400;500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- External Stylesheets -->
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body class="theme-silence">
+
+  <!-- Aperture Shutter Intro Pre-loader -->
+  <div id="aperture-loader" class="aperture-loader">
+    <div class="aperture-container">
+      <svg class="aperture-svg" viewBox="0 0 100 100">
+        <defs>
+          <!-- Specular metallic gradient for the shutter blades -->
+          <linearGradient id="blade-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#18181c" />
+            <stop offset="40%" stop-color="#0e0e11" />
+            <stop offset="70%" stop-color="#121215" />
+            <stop offset="100%" stop-color="#060608" />
+          </linearGradient>
+        </defs>
+        <!-- Outer lens bezel calibration ticks -->
+        <circle cx="50" cy="50" r="47" stroke="rgba(255, 255, 255, 0.2)" stroke-width="1.5" stroke-dasharray="1 3.5" fill="none"/>
+        <circle cx="50" cy="50" r="44" stroke="rgba(255, 255, 255, 0.08)" stroke-width="1" fill="none"/>
+        <!-- Fine focus metric indicators -->
+        <circle cx="50" cy="50" r="41" stroke="rgba(255, 255, 255, 0.04)" stroke-width="0.5" fill="none"/>
+        
+        <!-- Photographic metadata markings around the bezel -->
+        <text x="50" y="8" font-size="2.8" fill="rgba(255,255,255,0.4)" font-family="monospace" letter-spacing="1" text-anchor="middle">50mm 1:1.4</text>
+        <text x="50" y="94" font-size="2.8" fill="rgba(255,255,255,0.4)" font-family="monospace" letter-spacing="1" text-anchor="middle">NPS - SILENCE</text>
+        
+        <g class="blades">
+          <!-- Overlapping 8-blade shutter array representing closed f/22 lens state -->
+          <path class="aperture-blade b1" d="M50,10 L78.3,21.7 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b2" d="M78.3,21.7 L90,50 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b3" d="M90,50 L78.3,78.3 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b4" d="M78.3,78.3 L50,90 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b5" d="M50,90 L21.7,78.3 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b6" d="M21.7,78.3 L10,50 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b7" d="M10,50 L21.7,21.7 L50,50 Z" fill="url(#blade-gradient)" />
+          <path class="aperture-blade b8" d="M21.7,21.7 L50,10 L50,50 Z" fill="url(#blade-gradient)" />
+        </g>
+      </svg>
+      <div class="loader-text font-mono">INITIATING LENS FOCUS...</div>
+    </div>
+  </div>
+
+  <!-- Header & Navigation -->
+  <header class="main-header">
+    <div class="header-container">
+      <a href="#" class="logo-area" id="logo-link">
+        <img src="https://res.cloudinary.com/dfslvsd7j/image/upload/v1783715720/ChatGPT_Image_Jul_11_2026_02_30_39_AM_jkun1c.png" alt="Safayet Ullah Logo" class="site-logo" referrerPolicy="no-referrer" />
+        <div class="logo-text">
+          <span class="logo-name">Safayet Ullah</span>
+          <span class="logo-sub">Photographer</span>
+        </div>
+      </a>
+      
+      <nav class="desktop-nav">
+        <a href="#hero" class="nav-link">Home</a>
+        <a href="#gallery" class="nav-link">Gallery</a>
+        <a href="#essays" class="nav-link">Essays</a>
+        <a href="#journey" class="nav-link">Journey Map</a>
+        <a href="#connect" class="nav-link">Connect</a>
+      </nav>
+
+      <div class="header-actions">
+        <!-- Camera Status LCD -->
+        <div id="camera-lcd" class="camera-lcd font-mono" aria-live="polite">
+          [ MODE: HERO ]
+        </div>
+        
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle Theme">
+          <span class="toggle-indicator"></span>
+          <span class="toggle-text-silence">Silence</span>
+          <span class="toggle-text-light">Light</span>
+        </button>
+        
+        <!-- Mobile Menu Trigger -->
+        <button class="mobile-menu-btn" id="mobile-menu-trigger" aria-label="Toggle Navigation Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Sidebar Menu -->
+  <div class="mobile-sidebar" id="mobile-sidebar">
+    <div class="mobile-sidebar-header">
+      <img src="https://res.cloudinary.com/dfslvsd7j/image/upload/v1783715720/ChatGPT_Image_Jul_11_2026_02_30_39_AM_jkun1c.png" alt="Logo" class="sidebar-logo" referrerPolicy="no-referrer" />
+      <button class="close-sidebar-btn" id="close-sidebar-btn"><i data-lucide="x"></i></button>
+    </div>
+    <nav class="mobile-nav-links">
+      <a href="#hero" class="mobile-nav-link">Home</a>
+      <a href="#gallery" class="mobile-nav-link">Gallery</a>
+      <a href="#essays" class="mobile-nav-link">Essays</a>
+      <a href="#journey" class="mobile-nav-link">Journey Map</a>
+      <a href="#connect" class="mobile-nav-link">Connect</a>
+    </nav>
+    <div class="mobile-sidebar-footer">
+      <p class="philosophy">"Finding stories in light & silence."</p>
+    </div>
+  </div>
+
+  <!-- Hero Section: Cinematic Parallax Showcase -->
+  <section id="hero" class="hero-section">
+    <!-- Parallax Slide 1 -->
+    <div class="parallax-slide active" id="slide-1" style="background-image: url('/photo12.jpg');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-meta tracking-widest font-mono">SCENE I &bull; THE DEEP SILENCE</span>
+        <h1 class="slide-title font-serif" id="typewriter-1">Silence is not the absence of sound, but the presence of stillness.</h1>
+        <p class="slide-desc">Sreemangal, Bangladesh &mdash; Dusk. Silhouettes of palm trees stand absolute against an endless, dusty sky, holding secrets of passing moments.</p>
+        <div class="scroll-prompt">
+          <span class="scroll-text font-mono">Scroll to Descend</span>
+          <div class="scroll-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallax Slide 2 -->
+    <div class="parallax-slide" id="slide-2" style="background-image: url('/photo9.jpg');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-meta tracking-widest font-mono">SCENE II &bull; THE GOLDEN CURVE</span>
+        <h1 class="slide-title font-serif" id="typewriter-2">Light reveals the form, but shadows carve the soul.</h1>
+        <p class="slide-desc">Tejgaon, Dhaka &mdash; Twilight. A concrete overhead pass splits the sky into a striking gradient of amber and teal under a slender crescent moon.</p>
+        <div class="scroll-prompt">
+          <span class="scroll-text font-mono">Scroll to Descend</span>
+          <div class="scroll-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallax Slide 3 -->
+    <div class="parallax-slide" id="slide-3" style="background-image: url('/photo1.jpg');">
+      <div class="slide-overlay"></div>
+      <div class="slide-content">
+        <span class="slide-meta tracking-widest font-mono">SCENE III &bull; THE COLLAPSE OF DAY</span>
+        <h1 class="slide-title font-serif" id="typewriter-3">Where the embers meet the dark, time dissolves into stillness.</h1>
+        <p class="slide-desc">Tejgaon, Dhaka &mdash; Golden Hour. The sky breaks open in a final, fiery gasp of amber before the heavy ink of night consumes the city.</p>
+        <div class="scroll-prompt">
+          <span class="scroll-text font-mono">Scroll to Gallery</span>
+          <div class="scroll-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Parallax Controls -->
+    <div class="parallax-indicators">
+      <button class="indicator-dot active" data-slide="1" aria-label="Slide 1"></button>
+      <button class="indicator-dot" data-slide="2" aria-label="Slide 2"></button>
+      <button class="indicator-dot" data-slide="3" aria-label="Slide 3"></button>
+    </div>
+  </section>
+
+  <!-- Interactive Before/After Image Slider Section -->
+  <section id="process" class="slider-showcase-section">
+    <div class="section-container">
+      <div class="section-intro text-center">
+        <span class="section-tag font-mono">THE CRAFT</span>
+        <h2 class="section-heading font-serif">Sculpting the Raw Frame</h2>
+        <p class="section-subheading">Hover or drag to witness the transformation of raw light into emotional depth. Photography is not just recording reality; it is developing an atmosphere.</p>
+      </div>
+
+      <div class="before-after-wrapper">
+        <div class="before-after-container" id="before-after-slider">
+          <!-- After Image (Developed / Background) -->
+          <img src="/photo8.jpg" alt="Developed Mood" class="image-after" referrerPolicy="no-referrer" />
+          <div class="label-after font-mono">DEVELOPED EMOTION</div>
+          
+          <!-- Before Image (Raw / Overlay) -->
+          <div class="image-before-container" id="before-image-container">
+            <img src="/photo8.jpg" alt="Raw File" class="image-before" style="filter: saturate(0.3) contrast(0.85) brightness(1.15);" referrerPolicy="no-referrer" />
+            <div class="label-before font-mono">RAW FRAME</div>
+          </div>
+          
+          <!-- Slider Handle -->
+          <div class="slider-handle" id="slider-handle">
+            <div class="handle-line"></div>
+            <div class="handle-button">
+              <i data-lucide="chevrons-left-right" class="handle-icon"></i>
+            </div>
+            <div class="handle-line"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mood-Based Gallery Section -->
+  <section id="gallery" class="gallery-section">
+    <div class="section-container">
+      <div class="gallery-header flex-between-column-mobile">
+        <div class="gallery-title-area">
+          <span class="section-tag font-mono">ARCHIVE</span>
+          <h2 class="section-heading font-serif">Mood-Based Gallery</h2>
+          <p class="section-subheading">Filter through three emotional landscapes: the introspective dark of <strong>Silence</strong>, the warm glow of <strong>Light Play</strong>, or the atmospheric isolation of <strong>Ethereal Mist</strong>.</p>
+        </div>
+        
+        <!-- Gallery Filter Toggles -->
+        <div class="gallery-filters font-mono">
+          <button class="filter-btn active" data-filter="all">All Stories</button>
+          <button class="filter-btn" data-filter="silence">Silence</button>
+          <button class="filter-btn" data-filter="light">Light Play</button>
+          <button class="filter-btn" data-filter="mist">Ethereal Mist</button>
+        </div>
+      </div>
+
+      <!-- Gallery Grid -->
+      <div class="gallery-grid" id="gallery-grid">
+        
+        <!-- Photo 1 (Silence) -->
+        <div class="gallery-item" data-mood="silence" data-story="Standing on my rooftop, I watched the sky break open in a final, fiery gasp of amber before the heavy ink of night consumed the city. In this fleeting moment of transition, the bustling streets below fell quiet in my mind, replaced by an overwhelming stillness. I held my breath, capturing the exact instant where the heavy clouds met the intense, quiet warmth of the dying sun." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/4.0" data-shutter="1/320s" data-iso="200" data-location="Tejgaon, Dhaka, Bangladesh" data-title="Between the Embers and the Dark">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo1.jpg" alt="Between the Embers and the Dark" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Tejgaon, Dhaka &bull; Silence</span>
+                <h3 class="item-title font-serif">Between the Embers and the Dark</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 2 (Silence) -->
+        <div class="gallery-item" data-mood="silence" data-story="I stood beneath the ancient branches as the day began to bleed its final, vibrant sighs into the darkening canopy. The sky caught fire in a single, silent brushstroke of orange, a momentary warmth that felt like a quiet secret shared between the earth and the heavens. In that fleeting convergence of shadow and light, I found a stillness that demanded nothing but my quiet observation." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/4.0" data-shutter="1/250s" data-iso="200" data-location="Dhanmondi Lake, Dhaka, Bangladesh" data-title="Embers in the Vault of Sky">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo2.jpg" alt="Embers in the Vault of Sky" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Dhanmondi Lake, Dhaka &bull; Silence</span>
+                <h3 class="item-title font-serif">Embers in the Vault of Sky</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 3 (Light Play) -->
+        <div class="gallery-item" data-mood="light" data-story="I stood on the rooftop as the day slowly exhaled its final warmth, watching the sun position itself perfectly in the gaps of our crowded city. There is a fleeting moment where the concrete softens under the touch of golden light, making the chaotic metropolis feel momentarily at peace. I waited for this exact alignment, where the sky's fire peeks through the silhouette of home." data-camera="Fujifilm GFX 100S" data-lens="GF 45-100mm f/4 R LM OIS WR" data-aperture="f/8.0" data-shutter="1/500s" data-iso="100" data-location="Tejgaon, Dhaka, Bangladesh" data-title="Where the Sun Whispers to the Concrete">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo3.jpg" alt="Where the Sun Whispers to the Concrete" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Tejgaon, Dhaka &bull; Light Play</span>
+                <h3 class="item-title font-serif">Where the Sun Whispers to the Concrete</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 4 (Light Play) -->
+        <div class="gallery-item" data-mood="light" data-story="I stood still as the day slowly surrendered to the night, watching the harsh urban concrete dissolve into soft silhouettes against a burning sky. In this fleeting transition, the chaotic hum of the city seemed to fade into a quiet whisper beneath the drifting gold of the clouds. It is in these brief, unhurried intervals that the city reveals its true, contemplative soul to those patient enough to look up." data-camera="Fujifilm GFX 100S" data-lens="GF 45-100mm f/4 R LM OIS WR" data-aperture="f/8.0" data-shutter="1/500s" data-iso="100" data-location="Mirpur, Dhaka, Bangladesh" data-title="Where the Sky Meets the Stone">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo4.jpg" alt="Where the Sky Meets the Stone" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Mirpur, Dhaka &bull; Light Play</span>
+                <h3 class="item-title font-serif">Where the Sky Meets the Stone</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 5 (Light Play) -->
+        <div class="gallery-item" data-mood="light" data-story="I stood on the rooftop as the city fell into shadow, watching the sun paint its final strokes on the canvas of clouds above. The high wires seemed to hum with the quiet electricity of a day winding down, suspended between the warmth of what was and the cool mystery of what will be. In this transient moment, the rush of Dhaka vanished, leaving only the soft whisper of the golden hour." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/5.6" data-shutter="1/500s" data-iso="100" data-location="Dhaka, Bangladesh" data-title="Where the Day Pauses">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo5.jpg" alt="Where the Day Pauses" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Dhaka &bull; Light Play</span>
+                <h3 class="item-title font-serif">Where the Day Pauses</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 6 (Silence) -->
+        <div class="gallery-item" data-mood="silence" data-story="I stood still as the day collapsed into a quiet shade of grey, waiting for that single, fleeting pocket of warmth to break the horizon. For a few brief moments, the sky whispered its final secrets through the silhouette of a lonely palm tree, reminding me that even the heaviest clouds hold a spark of fire. It was a silent dialogue between the dying light and the rising dark, captured in absolute stillness." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/4.0" data-shutter="1/250s" data-iso="200" data-location="Khulna, Bangladesh" data-title="The Last Solitary Pulse">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo6.jpg" alt="The Last Solitary Pulse" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Khulna &bull; Silence</span>
+                <h3 class="item-title font-serif">The Last Solitary Pulse</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 7 (Ethereal Mist) -->
+        <div class="gallery-item" data-mood="mist" data-story="I looked up past the tangled lines of our everyday lives, finding a brief sanctuary in the drifting, heavy clouds. The humid air seemed to hold its breath, casting a soft, muted blanket of light over the silent neighborhood below. In this quiet pause, the sky became a quiet canvas for my own fleeting thoughts." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/8.0" data-shutter="1/1000s" data-iso="100" data-location="Tejgaon, Dhaka, Bangladesh" data-title="Skyward Intercepts">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo7.jpg" alt="Skyward Intercepts" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Tejgaon, Dhaka &bull; Ethereal Mist</span>
+                <h3 class="item-title font-serif">Skyward Intercepts</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 8 (Silence) -->
+        <div class="gallery-item" data-mood="silence" data-story="Looking upward, I watched these islands of vapor drift through an immense blue sea, finding a strange solace in their slow, silent disintegration. In the heat of the afternoon, the world below seemed to vanish, leaving only the quiet pulse of the sky and the soft rustle of the leaves below. It was a brief, necessary suspension of time, a moment to simply breathe alongside the atmosphere." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/8.0" data-shutter="1/1000s" data-iso="64" data-location="Sreemangal, Bangladesh" data-title="An Anatomy of Quiet Sky">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo8.jpg" alt="An Anatomy of Quiet Sky" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Sreemangal &bull; Silence</span>
+                <h3 class="item-title font-serif">An Anatomy of Quiet Sky</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 9 (Light Play) -->
+        <div class="gallery-item" data-mood="light" data-story="As the urban clamor dissolved into the golden hum of twilight, I stood beneath the overhead pass, watching the sky split into a striking gradient of amber and teal. I waited patiently for the crescent moon to align perfectly in the vast, quiet negative space above the heavy geometric silhouette. In that brief, breathless moment, the concrete structure seemed to lose its weight, transforming into a silent monument to the ending day." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/5.6" data-shutter="1/125s" data-iso="400" data-location="Tejgaon, Dhaka, Bangladesh" data-title="The Slender Curved Smile of Dusk">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo9.jpg" alt="The Slender Curved Smile of Dusk" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Tejgaon, Dhaka &bull; Light Play</span>
+                <h3 class="item-title font-serif">The Slender Curved Smile of Dusk</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 10 (Light Play) -->
+        <div class="gallery-item" data-mood="light" data-story="I stood quietly as the tropical sky caught fire, burning away the noise of the bustling city below. Framed by palm leaves and the harsh geometry of power lines, the fleeting gold felt like a silent sanctuary. In that momentary pause, the chaotic world was reduced to nothing but color, shadow, and quiet wonder." data-camera="Leica M11" data-lens="Leica Summilux-M 35mm f/1.4 ASPH" data-aperture="f/4.0" data-shutter="1/125s" data-iso="200" data-location="Tejgaon, Dhaka, Bangladesh" data-title="Amber Whispers over Concrete">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo10.jpg" alt="Amber Whispers over Concrete" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Tejgaon, Dhaka &bull; Light Play</span>
+                <h3 class="item-title font-serif">Amber Whispers over Concrete</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 11 (Light Play) -->
+        <div class="gallery-item" data-mood="light" data-story="Standing on the rooftop, I watched the sun slowly slip behind the concrete giants, its golden rays scattering across the textured canvas of the sky. In this transient moment, the chaotic city of Dhaka seemed to hold its breath, embraced by a fleeting warmth that dissolved all noise into absolute peace. I waited for this exact alignment, where the light doesn't just illuminate the structures, but gently caresses them goodbye." data-camera="Fujifilm GFX 100S" data-lens="Fujifilm GF 45-100mm f/4 R LM OIS WR" data-aperture="f/8.0" data-shutter="1/500s" data-iso="100" data-location="Mirpur, Dhaka, Bangladesh" data-title="When Daylight Whispers Goodbye">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo11.jpg" alt="When Daylight Whispers Goodbye" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Mirpur, Dhaka &bull; Light Play</span>
+                <h3 class="item-title font-serif">When Daylight Whispers Goodbye</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Photo 12 (Silence) -->
+        <div class="gallery-item" data-mood="silence" data-story="I watched the warm breath of the dying sun slowly surrender to the cool, quiet blue of the coming night. Standing in absolute stillness, the palm silhouettes became anchors of memory against an endless, dusty sky. It was a fleeting transition where the earth held its breath, and I captured the deep silence of that passing moment." data-camera="Fujifilm GFX 100S" data-lens="Fujifilm GF 45-100mm f/4 R LM OIS WR" data-aperture="f/5.6" data-shutter="1/125s" data-iso="200" data-location="Sreemangal, Bangladesh" data-title="Where the Day Fades to Blue">
+          <div class="gallery-img-wrapper">
+            <img class="gallery-img" src="/photo12.jpg" alt="Where the Day Fades to Blue" referrerPolicy="no-referrer" />
+            <div class="gallery-overlay">
+              <div class="overlay-content">
+                <span class="item-meta font-mono">Sreemangal &bull; Silence</span>
+                <h3 class="item-title font-serif">Where the Day Fades to Blue</h3>
+                <span class="view-narrative font-mono">Read Story <i data-lucide="arrow-up-right"></i></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Essays Section -->
+  <section id="essays" class="essays-section">
+    <div class="section-container">
+      <div class="section-intro">
+        <span class="section-tag font-mono">SEQUENCES</span>
+        <h2 class="section-heading font-serif">Photo Essays</h2>
+        <p class="section-subheading">A collection of sequenced images exploring a single visual dialogue over time, geometry, and emotion.</p>
+      </div>
+
+      <!-- Essay 1: The Buriganga Suite -->
+      <div class="essay-block">
+        <div class="essay-info">
+          <span class="essay-num font-mono">ESSAY 01 &mdash; THE BURIGANGA SUITE</span>
+          <h3 class="essay-title font-serif">Echoes of Sadarghat</h3>
+          <p class="essay-description">A visual meditation on the historic river of Dhaka. Exploring the interface of diesel haze, towering ferry silhouettes, and the quiet resilience of small wooden country boats moving through the silver mist.</p>
+          <div class="essay-meta-details font-mono">
+            <span>Captured: Jan 2026</span>
+            <span>Frames: 3 Sequenced</span>
+            <span>Focus: High-contrast atmospheric silhouetting</span>
+          </div>
+        </div>
+        
+        <div class="essay-sequence">
+          <!-- Essay Frame 1 -->
+          <div class="essay-frame">
+            <div class="frame-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1618083707368-b3823daa2726?q=80&w=600" alt="The Buriganga Suite - Frame 1" class="frame-img" referrerPolicy="no-referrer" />
+              <div class="frame-number font-mono">I</div>
+            </div>
+            <div class="frame-caption font-serif">"The Silver Wake: Before the city roars, country boats slice the heavy mist of dawn, carving quiet paths on the ancient water."</div>
+          </div>
+          <!-- Essay Frame 2 -->
+          <div class="essay-frame">
+            <div class="frame-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1543872084-c7bd3822856f?q=80&w=600" alt="The Buriganga Suite - Frame 2" class="frame-img" referrerPolicy="no-referrer" />
+              <div class="frame-number font-mono">II</div>
+            </div>
+            <div class="frame-caption font-serif">"The Iron Giants: Fragile wooden oars stroke past the towering, steel-hulled passenger launches moored in their massive silence."</div>
+          </div>
+          <!-- Essay Frame 3 -->
+          <div class="essay-frame">
+            <div class="frame-image-wrapper">
+              <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?q=80&w=600" alt="The Buriganga Suite - Frame 3" class="frame-img" referrerPolicy="no-referrer" />
+              <div class="frame-number font-mono">III</div>
+            </div>
+            <div class="frame-caption font-serif">"Amber Transition: At dusk, the industrial smoke of Dhaka catches the last rays of sun, enveloping the river in a warm, contemplative glow."</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Essay 2: Sreemangal Suite -->
+      <div class="essay-block reverse">
+        <div class="essay-info">
+          <span class="essay-num font-mono">ESSAY 02 &mdash; TEA-COUNTRY SILENCE</span>
+          <h3 class="essay-title font-serif">The Weight of Mist</h3>
+          <p class="essay-description">An exploration of Sreemangal and Sylhet under the soft cover of low clouds. Where colors dissolve into deep emerald grays, and the vertical lines of tea gardens demand a quiet, slow-breathing observation.</p>
+          <div class="essay-meta-details font-mono">
+            <span>Captured: May 2026</span>
+            <span>Frames: 3 Sequenced</span>
+            <span>Focus: Soft-focus low-key atmosphere</span>
+          </div>
+        </div>
+        
+        <div class="essay-sequence">
+          <!-- Essay Frame 1 -->
+          <div class="essay-frame">
+            <div class="frame-image-wrapper">
+              <img src="/photo12.jpg" alt="Sreemangal - Frame 1" class="frame-img" referrerPolicy="no-referrer" />
+              <div class="frame-number font-mono">I</div>
+            </div>
+            <div class="frame-caption font-serif">"Dusk's embrace: a single palm tree silhouetted against a dusty, dark-blue sky as the day's warmth recedes."</div>
+          </div>
+          <!-- Essay Frame 2 -->
+          <div class="essay-frame">
+            <div class="frame-image-wrapper">
+              <img src="/photo8.jpg" alt="Sreemangal - Frame 2" class="frame-img" referrerPolicy="no-referrer" />
+              <div class="frame-number font-mono">II</div>
+            </div>
+            <div class="frame-caption font-serif">"The Canopy of Silence: looking upward past palm fronds into a vast, empty grey sky where clouds disintegrate in slow motion."</div>
+          </div>
+          <!-- Essay Frame 3 -->
+          <div class="essay-frame">
+            <div class="frame-image-wrapper">
+              <img src="/photo6.jpg" alt="Sreemangal - Frame 3" class="frame-img" referrerPolicy="no-referrer" />
+              <div class="frame-number font-mono">III</div>
+            </div>
+            <div class="frame-caption font-serif">"The Final Pulse: The last crimson ember of sunset breaking through heavy, dark clouds on the distant horizon."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Journey Map Section -->
+  <section id="journey" class="journey-section">
+    <div class="section-container">
+      <div class="section-intro text-center">
+        <span class="section-tag font-mono">GEOGRAPHY</span>
+        <h2 class="section-heading font-serif">The Interactive Journey Map</h2>
+        <p class="section-subheading">A visual index of where these moments of silence and light were discovered. Click any glowing geographic dot to reveal its story.</p>
+      </div>
+
+      <div class="map-wrapper">
+        <div class="map-container" id="map-container">
+          <!-- SVG Minimal World Map Layout -->
+          <svg class="world-map-svg" viewBox="0 0 1000 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path class="map-landmass" d="M150,150 Q180,110 210,130 T250,100 T300,120 T350,150 T320,200 T250,220 T200,210 Z" />
+            <path class="map-landmass" d="M450,100 Q500,80 550,100 T600,120 T650,100 T700,130 T750,110 T800,140 T850,180 T800,240 T750,280 T700,250 T650,300 T600,320 T550,280 T500,250 Z" />
+            <path class="map-landmass" d="M180,260 Q220,240 260,280 T300,320 T280,380 T220,400 T180,350 Z" />
+            <path class="map-landmass" d="M520,350 Q560,330 600,360 T640,400 T600,430 T540,410 Z" />
+            <path class="map-landmass" d="M720,320 Q760,300 800,330 T840,380 T800,420 T740,400 Z" />
+            
+            <line x1="100" y1="0" x2="100" y2="500" class="map-grid-line" />
+            <line x1="300" y1="0" x2="300" y2="500" class="map-grid-line" />
+            <line x1="500" y1="0" x2="500" y2="500" class="map-grid-line" />
+            <line x1="700" y1="0" x2="700" y2="500" class="map-grid-line" />
+            <line x1="900" y1="0" x2="900" y2="500" class="map-grid-line" />
+            <line x1="0" y1="100" x2="1000" y2="100" class="map-grid-line" />
+            <line x1="0" y1="250" x2="1000" y2="250" class="map-grid-line" />
+            <line x1="0" y1="400" x2="1000" y2="400" class="map-grid-line" />
+          </svg>
+
+          <!-- Glowing Dots (Absolute Positioned over SVG proportions focused around Bangladesh and regions) -->
+          <!-- Dot 1: Tejgaon, Dhaka (61.5%, 43%) -->
+          <div class="map-dot" style="left: 61.5%; top: 43%;" data-id="dot-tejgaon" 
+               data-place="Tejgaon, Dhaka" 
+               data-narrative="Watching urban concrete dissolve into warm golden hours. Capturing the beautiful crescent moon balanced between silhouettes of power lines and tall palms."
+               data-photo="/photo9.jpg">
+            <span class="pulse-ring"></span>
+            <span class="dot-core"></span>
+          </div>
+
+          <!-- Dot 2: Sreemangal (63.5%; top: 44.5%) -->
+          <div class="map-dot" style="left: 63.5%; top: 44.5%;" data-id="dot-sreemangal" 
+               data-place="Sreemangal, Bangladesh" 
+               data-narrative="Where deep tea estates meet heavy rain-mote clouds. Capturing the solitary lines of palms as the daylight slowly drains to dark indigo."
+               data-photo="/photo12.jpg">
+            <span class="pulse-ring"></span>
+            <span class="dot-core"></span>
+          </div>
+
+          <!-- Dot 3: Khulna (60%; top: 45.8%) -->
+          <div class="map-dot" style="left: 60%; top: 45.8%;" data-id="dot-khulna" 
+               data-place="Khulna, Bangladesh" 
+               data-narrative="An exploration of silent tree lines. Finding moments where a single palm standing against heavy grey clouds acts as a lightning rod for the eyes."
+               data-photo="/photo6.jpg">
+            <span class="pulse-ring"></span>
+            <span class="dot-core"></span>
+          </div>
+
+          <!-- Dot 4: Mirpur (61%; top: 41.5%) -->
+          <div class="map-dot" style="left: 61%; top: 41.5%;" data-id="dot-mirpur" 
+               data-place="Mirpur, Dhaka" 
+               data-narrative="High vantage rooftops. Watching massive, textured blankets of cloud turn gold, casting soft reflections onto the stone structures of the city."
+               data-photo="/photo11.jpg">
+            <span class="pulse-ring"></span>
+            <span class="dot-core"></span>
+          </div>
+
+          <!-- Dot 5: Dhanmondi Lake (62.2%; top: 44.8%) -->
+          <div class="map-dot" style="left: 62.2%; top: 44.8%;" data-id="dot-dhanmondi" 
+               data-place="Dhanmondi Lake, Dhaka" 
+               data-narrative="Finding peace under a vault of ancient tree branches. Watching the sky catch fire in a silent orange glow that reflects softly on quiet waters."
+               data-photo="/photo2.jpg">
+            <span class="pulse-ring"></span>
+            <span class="dot-core"></span>
+          </div>
+
+          <!-- Interactive Map Popup Card -->
+          <div class="map-popup-card" id="map-popup">
+            <button class="popup-close-btn" id="popup-close-btn"><i data-lucide="x"></i></button>
+            <div class="popup-image-area">
+              <img src="" alt="Location Visual" class="popup-img" id="popup-img" referrerPolicy="no-referrer" />
+            </div>
+            <div class="popup-content-area">
+              <h4 class="popup-place font-serif" id="popup-place">Location</h4>
+              <p class="popup-text font-serif" id="popup-text">Story text goes here...</p>
+              <div class="popup-footer font-mono">
+                <span>Latitude: <span id="popup-lat">23.75N</span></span>
+                <span>Longitude: <span id="popup-lon">90.39E</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Connect Section -->
+  <section id="connect" class="connect-section">
+    <div class="section-container">
+      <div class="connect-grid">
+        <!-- Portrait Side -->
+        <div class="connect-portrait-area">
+          <div class="portrait-wrapper">
+            <img src="profile.jpg" alt="Safayet Ullah" class="connect-portrait" referrerPolicy="no-referrer" />
+            <div class="portrait-overlay"></div>
+          </div>
+        </div>
+        
+        <!-- Bio / Details Side -->
+        <div class="connect-details-area">
+          <span class="section-tag font-mono">THE PHOTOGRAPHER</span>
+          <h2 class="connect-heading font-serif">Connect with Safayet</h2>
+          
+          <div class="safayet-profile">
+            <h3 class="safayet-name font-serif">Safayet Ullah</h3>
+            <div class="safayet-location font-mono">
+              <i data-lucide="map-pin"></i> <span>Feni, Bangladesh</span>
+            </div>
+            
+            <p class="safayet-bio font-serif">
+              "Silence is not the absence of sound, but the presence of a deeper story waiting to be witnessed." 
+              I am a visual storyteller dedicated to capturing the raw, quiet, and sublime dialogues between shadow and light. 
+              My practice is a form of active meditation—waiting hours for the single beam, the drifting mist, or the quiet moment that reveals the true, contemplative soul of my homeland.
+            </p>
+            
+            <p class="safayet-philosophy font-serif italic">
+              Through my lens, the chaotic geometry of our everyday lives dissolves into simple, emotional spaces of quiet wonder and Ethereal stillness.
+            </p>
+          </div>
+
+          <!-- Interactive Connection Buttons -->
+          <div class="connection-buttons">
+            <a href="https://www.instagram.com/it_safayet?igsh=OGQ5ZDc2ODk2ZA%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" class="connect-btn insta-btn font-mono" id="btn-instagram">
+              <i data-lucide="instagram"></i> <span>Instagram</span>
+            </a>
+            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="connect-btn fb-btn font-mono" id="btn-facebook">
+              <i data-lucide="facebook"></i> <span>Facebook</span>
+            </a>
+            <a href="https://wa.me/8801333150238" target="_blank" rel="noopener noreferrer" class="connect-btn wa-btn font-mono" id="btn-whatsapp">
+              <i data-lucide="message-circle"></i> <span>WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container flex-between-column-mobile">
+      <div class="footer-left">
+        <p class="copyright font-mono">&copy; 2026 SAFAYET ULLAH. ALL RIGHTS RESERVED.</p>
+      </div>
+      <div class="footer-middle">
+        <p class="motto font-serif">"Finding stories in light & silence."</p>
+      </div>
+      <div class="footer-right font-mono">
+        <a href="#hero" class="back-to-top">ASCEND TO LIGHT <i data-lucide="arrow-up" class="arrow-icon"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Zen Mode Storytelling Modal -->
+  <div class="zen-modal" id="zen-modal">
+    <button class="zen-close-btn" id="zen-close-btn" aria-label="Close Zen Mode">
+      <i data-lucide="x"></i>
+    </button>
+    
+    <div class="zen-content">
+      <div class="zen-image-container">
+        <img src="" alt="Active Story Photo" class="zen-main-img" id="zen-main-img" referrerPolicy="no-referrer" />
+      </div>
+      
+      <div class="zen-sidebar">
+        <div class="zen-sidebar-content">
+          <div class="zen-header">
+            <span class="zen-tag font-mono" id="zen-meta-tag">SILENCE</span>
+            <h3 class="zen-title font-serif" id="zen-title">The Silver Mirror</h3>
+            <span class="zen-location font-mono" id="zen-location">Hakone, Japan</span>
+          </div>
+          
+          <div class="zen-story-wrapper">
+            <p class="zen-story font-serif" id="zen-story">Story text goes here...</p>
+          </div>
+          
+          <!-- EXIF Grid -->
+          <div class="exif-box">
+            <div class="exif-header font-mono">EXIF DATA</div>
+            <table class="exif-table font-mono">
+              <tr>
+                <td class="exif-label">Camera</td>
+                <td class="exif-val" id="exif-camera">-</td>
+              </tr>
+              <tr>
+                <td class="exif-label">Lens</td>
+                <td class="exif-val" id="exif-lens">-</td>
+              </tr>
+              <tr>
+                <td class="exif-label">Aperture</td>
+                <td class="exif-val" id="exif-aperture">-</td>
+              </tr>
+              <tr>
+                <td class="exif-label">Shutter Speed</td>
+                <td class="exif-val" id="exif-shutter">-</td>
+              </tr>
+              <tr>
+                <td class="exif-label">ISO</td>
+                <td class="exif-val" id="exif-iso">-</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript Modules -->
+  <script src="/script.js"></script>
+  <script src="/perf.js"></script>
+</body>
+</html>

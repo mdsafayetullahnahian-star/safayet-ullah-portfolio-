@@ -1,0 +1,6 @@
+{
+  "name": "Safayet Ullah - Photography Portfolio",
+  "description": "A minimalist, cinematic photography portfolio for Safayet Ullah, exploring stories in light and silence.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
